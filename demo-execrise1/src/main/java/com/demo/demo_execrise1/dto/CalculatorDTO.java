@@ -1,6 +1,5 @@
 package com.demo.demo_execrise1.dto;
 
-import com.demo.demo_execrise1.model.Operation;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +24,7 @@ public class CalculatorDTO {
   public void setResult(String result) {
     this.result = result;
   }
+
 }
 
 
