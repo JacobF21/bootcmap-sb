@@ -1,12 +1,12 @@
 server:
-  port: 8084
+  port: 8085
 
 api:
-  json-place-holder:
-    domain: 'jsonplaceholder.typicode.com'
+  defillama:
+    domain: 'api.llama.fi/v2/historicalChainTvl'
     endpoints: 
-      users: '/users'
-      posts: '/posts'
+      ethereum: '/Ethereum'
+      solana: '/Solana'
 
 database: 
   db-name: "db_2403"

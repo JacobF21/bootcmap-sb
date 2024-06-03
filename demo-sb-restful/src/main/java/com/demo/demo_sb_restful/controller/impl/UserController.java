@@ -3,12 +3,12 @@ package com.demo.demo_sb_restful.controller.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-import com.demo.demo_sb_restful.config.AppConfig;
 import com.demo.demo_sb_restful.controller.UserOperation;
 import com.demo.demo_sb_restful.dto.UserDTO;
+import com.demo.demo_sb_restful.entity.UserEntity;
 import com.demo.demo_sb_restful.mapper.UserMapper;
 import com.demo.demo_sb_restful.model.dto.User;
 import com.demo.demo_sb_restful.service.UserService;
@@ -46,4 +46,8 @@ public class UserController implements UserOperation {
     return userService.getUsers2();
   }
 
+  @Override
+  public UserEntity saveUser(UserEntity user){
+    return userService.save(user);
+  }
 }

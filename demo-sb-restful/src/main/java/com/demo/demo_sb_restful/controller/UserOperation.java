@@ -1,9 +1,12 @@
 package com.demo.demo_sb_restful.controller;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.demo.demo_sb_restful.dto.UserDTO;
+import com.demo.demo_sb_restful.entity.UserEntity;
 import com.demo.demo_sb_restful.model.dto.User;
 
 
@@ -23,5 +26,8 @@ public interface UserOperation {
 
   @RequestMapping(value="/jsonplaceholder/get_users")
   public List<User> getUsers2();
+
+  @PostMapping(value="/user")
+  UserEntity saveUser(@RequestBody UserEntity user);
 
 }

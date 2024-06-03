@@ -5,6 +5,6 @@ import jakarta.annotation.PostConstruct;
 
 public interface StockService {
   
-  CalculatorDTO sum();
+  // CalculatorDTO sum();
   
 }

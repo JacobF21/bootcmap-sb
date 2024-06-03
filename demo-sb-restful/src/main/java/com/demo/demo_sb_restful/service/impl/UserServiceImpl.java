@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.demo.demo_sb_restful.entity.UserEntity;
 import com.demo.demo_sb_restful.infra.Scheme;
 import com.demo.demo_sb_restful.model.dto.User;
+import com.demo.demo_sb_restful.repository.UserRepository;
 import com.demo.demo_sb_restful.service.UserService;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,6 +24,10 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private RestTemplate restTemplate;
+
+  //Spring will generate
+  @Autowired
+  private UserRepository userRepository;
 
   @Autowired
   @Qualifier("tempStorage")
@@ -56,6 +62,7 @@ public class UserServiceImpl implements UserService {
     return users;
   }
 
+  //when looping the list users, if we remove one of the user in the list the for-each loop still searching the list but the size is reduced
   public List<User> removeUsers(int userId){
     for(User user:users){
       if(user.getId()==userId){
@@ -72,5 +79,10 @@ public class UserServiceImpl implements UserService {
 
   public List<User> getUsers2(){
     return this.users;
+  }
+
+  @Override
+  public UserEntity save(UserEntity user){
+    return userRepository.save(user);
   }
 }

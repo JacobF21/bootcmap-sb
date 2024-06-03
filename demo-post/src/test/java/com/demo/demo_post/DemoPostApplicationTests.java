@@ -1,13 +1,13 @@
-package com.demo.demo_sb_restful;
+package com.demo.demo_post;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoSbRestfulApplicationTests {
+class DemoPostApplicationTests {
 
-	// @Test
-	// void contextLoads() {
-	// }
+	@Test
+	void contextLoads() {
+	}
 
 }
