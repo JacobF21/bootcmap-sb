@@ -1,8 +1,12 @@
 package com.demo.demo_sb_restful.infra;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import com.demo.demo_sb_restful.infra.ApiResp.ApiRespBuilder;
 import lombok.Getter;
 
 // @RestControllerAdvice // @ContollerAdvice + @ResponseBody
@@ -25,9 +29,15 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(BusinessRuntimeException.class)
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-  public ErrorResponse businessRuntimeExceptionHandler(
+  public ApiResp businessRuntimeExceptionHandler(
       BusinessRuntimeException e) {
-    return new ErrorResponse(e.getCode(), e.getMessage());
+    return new ApiRespBuilder().withId(e.getCode()).withMessage(e.getMessage()).withData(new ArrayList<>(Arrays.asList(5, 6))).build();
+  }
+
+  @ExceptionHandler(Exception.class)
+  @ResponseStatus(value=HttpStatus.BAD_REQUEST)
+  public ErrorResponse unhandledException(){
+     return new ErrorResponse(9999, "Other unhandled exception");
   }
 
   @Getter

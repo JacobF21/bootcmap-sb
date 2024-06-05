@@ -1,4 +1,4 @@
-package com.demo.demo_sb_restful.entity;
+package com.demo.demo_forum.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,19 +6,24 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-//JPA will generate the DDL (Create Table) by the definition in Entity Class
 @Entity
 @Table(name ="Users")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class UserEntity {
   
   @Id // Table Primary Key
   @GeneratedValue(strategy = GenerationType.IDENTITY) //Auto increment
+  @Column(name="user_id")
   private Long id;
   @Column(name="name")
   private String name;
@@ -29,17 +34,17 @@ public class UserEntity {
   private String website;
   //private AddressDTO address;
   @Column(name="addr_street")
-  private String addrStreet;
+  private String street;
   @Column(name="addr_suite")
-  private String addrSuite;
+  private String suite;
   @Column(name="addr_city")
-  private String addrCity;
+  private String city;
   @Column(name="addr_zipcode")
-  private String addrZipcode;
+  private String zipcode;
   @Column(name="addr_lat")
-  private String addrlatitude;
+  private String lat;
   @Column(name="addr_long")
-  private String addrlongitude;
+  private String lng;
   //private CompanyDTO company;
   @Column(name="company_name")
   private String companyName;
@@ -48,20 +53,5 @@ public class UserEntity {
   @Column(name="company_business")
   private String companyBusiness;
 
-  public void update(UserEntity temp){
-    this.name=temp.getName();
-    this.username=temp.getUsername();
-    this.email=temp.getEmail();
-    this.phone=temp.getPhone();
-    this.website=temp.getWebsite();
-    this.addrStreet=temp.getAddrStreet();
-    this.addrSuite=temp.getAddrSuite();
-    this.addrCity=temp.getAddrCity();
-    this.addrZipcode=temp.getAddrZipcode();
-    this.addrlatitude=temp.getAddrlatitude();
-    this.addrlongitude=temp.getAddrlongitude();
-    this.companyName=temp.getCompanyName();
-    this.companyCatchPhrase=temp.getCompanyCatchPhrase();
-    this.companyBusiness=temp.getCompanyBusiness();
-  }
 }
+

@@ -61,7 +61,7 @@ public class ApiResp<T> {
     Arrays.asList("abc","de");
     Arrays.asList(new String[]{"abc","def"});
 
-    ApiResp<UserDTO> test=new ApiRespBuilder().withData(Arrays.asList("abc","de")).withId(1).withMessage("gg").build();
+    ApiResp<UserDTO> test=new ApiRespBuilder().withData(Arrays.asList("abc","de")).withId(SysCode.OK.getCode()).withMessage("gg").build();
     System.out.println(test);
   }
 }

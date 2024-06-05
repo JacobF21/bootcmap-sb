@@ -1,13 +1,14 @@
-package com.demo.demo_sb_restful.model.dto;
+package com.demo.demo_forum.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class User {
-
-  private int id;
+  private Long id;
   private String name;
   private String username;
   private String email;
@@ -17,6 +18,7 @@ public class User {
   private Company company;
 
   @Getter
+  @Builder
   public static class Address {
     private String street;
     private String suite;
@@ -25,6 +27,7 @@ public class User {
     private Location geo;
 
     @Getter
+    @Builder
     public static class Location {
       @JsonProperty(value = "lat")
       private String latitude;
@@ -32,8 +35,8 @@ public class User {
       private String longitude;
     }
   }
-
   @Getter
+  @Builder
   public static class Company {
     private String name;
     private String catchPhrase;
@@ -41,4 +44,3 @@ public class User {
     private String business;
   }
 }
-

@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
+//Entity is the table in RDBMS
 @Entity
 @Table(name ="TVL")
 @Getter
