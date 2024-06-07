@@ -6,8 +6,8 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ApiRes {
+public class ApiRes<T> {
   private Long id;
   private String username;
-  private List<CommentDTO> comments;
+  private List<T> data;
 }

@@ -22,11 +22,13 @@ public class UserDetailsDTOMapper {
                                       .city(user.getAddress().getCity())
                                       .street(user.getAddress().getStreet())
                                       .suite(user.getAddress().getSuite())
+                                      .zipcode(user.getAddress().getZipcode())
                                       .geo(locationDTO)
                                       .build();
 
     CompanyDTO companyDTO = CompanyDTO.builder()
                                       .name(user.getCompany().getName())
+                                      .catchPhrase(user.getCompany().getCatchPhrase())
                                       .business(user.getCompany().getBusiness())
                                       .build();
     

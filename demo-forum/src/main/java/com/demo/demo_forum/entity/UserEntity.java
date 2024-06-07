@@ -1,10 +1,17 @@
 package com.demo.demo_forum.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,13 +26,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserEntity {
+public class UserEntity implements Serializable {
   
   @Id // Table Primary Key
   @GeneratedValue(strategy = GenerationType.IDENTITY) //Auto increment
-  @Column(name="user_id")
   private Long id;
-  @Column(name="name")
   private String name;
   @Column(name="user_name")
   private String username;
@@ -52,6 +57,15 @@ public class UserEntity {
   private String companyCatchPhrase;
   @Column(name="company_business")
   private String companyBusiness;
+
+  @OneToMany(mappedBy = "user" //
+      ,cascade = CascadeType.MERGE)
+  @JsonManagedReference
+  private List<PostEntity> posts = new ArrayList<>();
+
+  // @OneToMany(cascade = CascadeType.PERSIST)
+  // @JoinColumn(name="user_id")
+  // private List<PostEntity> posts = new ArrayList<>();
 
 }
 

@@ -7,13 +7,21 @@ import com.demo.demo_forum.entity.UserEntity;
 import com.demo.demo_forum.model.Comment;
 import com.demo.demo_forum.model.Post;
 import com.demo.demo_forum.model.User;
+import com.demo.demo_forum.model.dto.CommentDTO;
+
 
 public interface ForumService {
   public List<UserEntity> addUsers();
   public List<PostEntity> addPost();
-  public List<CommentEntity> addComment();
+  public List<CommentEntity> addComments();
   // public ApiRes getCommentsById(Long userId);
   public List<User> getUser();
   public List<Post> getPost(Long userId);
   public List<Comment> getComment(Long postId);
+  public List<CommentDTO> getCommetByPostId(Long postId);
+  public List<PostEntity> getPostByUserId(Long userId);
+  public List<UserEntity> getAllUser();
+  public UserEntity getUserById(Long userId);
+  public User updatUser(Long userId, User user);
+  public List<PostEntity> getAllPost();
 }

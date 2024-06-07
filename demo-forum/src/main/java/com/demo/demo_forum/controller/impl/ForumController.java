@@ -3,6 +3,7 @@ package com.demo.demo_forum.controller.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.demo.demo_forum.controller.ForumOperation;
 import com.demo.demo_forum.entity.CommentEntity;
@@ -13,11 +14,14 @@ import com.demo.demo_forum.infra.NotFoundException;
 import com.demo.demo_forum.mapper.CommentDTO2Mapper;
 import com.demo.demo_forum.mapper.CommentDTOMapper;
 import com.demo.demo_forum.mapper.PostDTOMapper;
+import com.demo.demo_forum.mapper.PostEntityMapper;
 import com.demo.demo_forum.mapper.UserCommentDTOMapper;
 import com.demo.demo_forum.mapper.UserDetailsDTOMapper;
+import com.demo.demo_forum.mapper.UserEntityMapper;
 import com.demo.demo_forum.model.Comment;
 import com.demo.demo_forum.model.Post;
 import com.demo.demo_forum.model.User;
+import com.demo.demo_forum.model.dto.ApiRes;
 import com.demo.demo_forum.model.dto.CommentDTO;
 import com.demo.demo_forum.model.dto.CommentDTO2;
 import com.demo.demo_forum.model.dto.PostDTO;
@@ -46,6 +50,12 @@ public class ForumController implements ForumOperation {
   @Autowired
   private UserCommentDTOMapper userCommentDTOMapper;
 
+  @Autowired
+  private UserEntityMapper userEntityMapper;
+
+  @Autowired
+  private PostEntityMapper postEntityMapper;
+
   @Override
   public List<UserEntity> addUsers() {
     return forumService.addUsers();
@@ -58,7 +68,7 @@ public class ForumController implements ForumOperation {
 
   @Override
   public List<CommentEntity> addComment() {
-    return forumService.addComment();
+    return forumService.addComments();
   }
 
   // @Override
@@ -118,4 +128,24 @@ public class ForumController implements ForumOperation {
       return userCommentDTOMapper.map(user, commentList);
     }).collect(Collectors.toList());
   }
+
+    public List<UserEntity> getAllUser(){
+      return forumService.getAllUser();
+    }
+
+    public User getUserById(String userId){
+      return userEntityMapper.map(forumService.getUserById(Long.parseLong(userId)));
+    }
+
+    public User updatUser(String userId, User user){
+      if(userId.equals(user.getId().toString())){
+        return forumService.updatUser(Long.parseLong(userId),user);
+      }
+        //TO-DO
+      throw new NotFoundException();
+    }
+
+    public List<Post> getAllPost(){
+      return forumService.getAllPost().stream().map(postEntityMapper::map).collect(Collectors.toList());
+    }
 }

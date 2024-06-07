@@ -6,5 +6,6 @@ import com.demo.demo_forum.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity,Long>{
-  
+    // @Query("Select u FROM UserEntity u")
+    // List<UserEntity> findAllUser();
 }

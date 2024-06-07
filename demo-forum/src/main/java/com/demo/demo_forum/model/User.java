@@ -7,6 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+@Builder
 public class User {
   private Long id;
   private String name;

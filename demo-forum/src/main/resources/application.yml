@@ -23,3 +23,6 @@ spring.jpa:
   show-sql: true
   hibernate.ddl-auto: update # update
   # Hibernate ddl auto (create, create-drop, validate, update)
+
+# spring.sql.init.mode: never
+# spring.jpa.hibernate.ddl-auto: none

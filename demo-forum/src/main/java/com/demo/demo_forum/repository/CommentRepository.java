@@ -6,14 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.demo.demo_forum.entity.CommentEntity;
+import com.demo.demo_forum.entity.PostEntity;
+import com.demo.demo_forum.model.dto.CommentDTO;
 
 @Repository
 public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
 
-  @Query(
-      value = "SELECT * FROM Comments c WHERE c.post_id IN (SELECT p.id FROM Posts p WHERE p.user_Id = :userId)",
-      nativeQuery = true)
-  List<CommentEntity> findCommentsByUserId(@Param("userId") Long userId);
-
-
+      @Query("SELECT new com.demo.demo_forum.model.dto.CommentDTO(c.id, c.name, c.email, c.body) " +
+           "FROM CommentEntity c WHERE c.post = :postId")
+       List<CommentDTO> findCommentDTObyPostId(@Param("postId") PostEntity postId);
 }
+
