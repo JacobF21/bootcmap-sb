@@ -20,4 +20,14 @@ public class CommentEntityMapper {
         
         return commentEntity;
     }
+
+    public Comment map(CommentEntity commentEntity){
+        return Comment.builder()
+                      .commentId(commentEntity.getId())
+                      .postId(commentEntity.getPost().getId())
+                      .name(commentEntity.getName())
+                      .email(commentEntity.getEmail())
+                      .body(commentEntity.getBody())
+                      .build();
+    }
 }

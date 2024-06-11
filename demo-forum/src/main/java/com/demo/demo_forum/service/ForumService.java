@@ -7,6 +7,8 @@ import com.demo.demo_forum.entity.UserEntity;
 import com.demo.demo_forum.model.Comment;
 import com.demo.demo_forum.model.Post;
 import com.demo.demo_forum.model.User;
+import com.demo.demo_forum.model.dto.ApiRes;
+import com.demo.demo_forum.model.dto.CommentBodyDTO;
 import com.demo.demo_forum.model.dto.CommentDTO;
 
 
@@ -24,4 +26,10 @@ public interface ForumService {
   public UserEntity getUserById(Long userId);
   public User updatUser(Long userId, User user);
   public List<PostEntity> getAllPost();
+  public List<PostEntity> getAllPostByUserId(Long userId);
+  public PostEntity addPostByUserId(Long userId, Post post);
+  public PostEntity deletePostByPostId(Long postId);
+  public List<CommentEntity> getAllComment();
+  public CommentEntity addCommentByPostId(Long postId, Comment comment);
+  public CommentEntity patchCommentByPostId(Long postId, CommentBodyDTO commentBodyDTO);
 }

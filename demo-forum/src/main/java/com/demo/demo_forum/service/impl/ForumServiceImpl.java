@@ -17,10 +17,8 @@ import com.demo.demo_forum.mapper.UserEntityMapper;
 import com.demo.demo_forum.model.Comment;
 import com.demo.demo_forum.model.Post;
 import com.demo.demo_forum.model.User;
+import com.demo.demo_forum.model.dto.CommentBodyDTO;
 import com.demo.demo_forum.model.dto.CommentDTO;
-import com.demo.demo_forum.model.dto.CommentDTO2;
-import com.demo.demo_forum.model.dto.PostDTO;
-import com.demo.demo_forum.model.dto.UserDetailsDTO;
 import com.demo.demo_forum.repository.CommentRepository;
 import com.demo.demo_forum.repository.PostRepository;
 import com.demo.demo_forum.repository.UserRepository;
@@ -190,7 +188,7 @@ public class ForumServiceImpl implements ForumService{
 
   @Override
   public List<UserEntity> getAllUser(){
-    return userRepository.findAll();
+    return userRepository.findAllByOrderById();
   }
 
   @Override
@@ -231,6 +229,56 @@ public class ForumServiceImpl implements ForumService{
     return postRepository.findAll();
   }
 
+  public List<PostEntity> getAllPostByUserId(Long userId){
+    Optional<UserEntity> userEntity = userRepository.findById(userId);
+    if(userEntity.isPresent()){
+      return postRepository.findPostbyUserId(UserEntity.builder().id(userId).build());
+    }
+    throw new NotFoundException();
+  }
 
+  public PostEntity addPostByUserId(Long userId, Post post){
+    Optional<UserEntity> userEntity = userRepository.findById(userId);
+    if(userEntity.isPresent()){
+      PostEntity latest =postRepository.save(postEntityMapper.map(post));
+      return postRepository.findById(latest.getId()).get();
+    }
+    throw new NotFoundException();
+  }
 
+  public PostEntity deletePostByPostId(Long postId){
+    Optional<PostEntity> postEntity = postRepository.findById(postId);
+    if(postEntity.isPresent()){
+      postRepository.delete(postEntity.get());
+      return postEntity.get();
+    }
+    throw new NotFoundException();
+  }
+
+  public List<CommentEntity> getAllComment(){
+    return commentRepository.findAll();
+  }
+
+  public CommentEntity addCommentByPostId(Long postId, Comment comment){
+    Optional<PostEntity> postEntity = postRepository.findById(postId);
+    if(postEntity.isPresent()){
+      return commentRepository.save(commentEntityMapper.map(comment));
+    }
+    throw new NotFoundException();
+  }
+
+  public CommentEntity patchCommentByPostId(Long commnetId, CommentBodyDTO commentBodyDTO){
+    Optional<CommentEntity> optionalCommentEntity = commentRepository.findById(commnetId);
+    if(optionalCommentEntity.isPresent()){
+      CommentEntity commentEntity = optionalCommentEntity.get();
+      commentEntity.setBody(commentBodyDTO.getBody());
+      commentRepository.save(commentEntity);
+      return commentEntity;
+    }
+    throw new NotFoundException();
+  } 
 }
+
+
+
+

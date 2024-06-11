@@ -1,6 +1,11 @@
 package com.demo.demo_forum.controller;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +16,7 @@ import com.demo.demo_forum.model.Comment;
 import com.demo.demo_forum.model.Post;
 import com.demo.demo_forum.model.User;
 import com.demo.demo_forum.model.dto.ApiRes;
+import com.demo.demo_forum.model.dto.CommentBodyDTO;
 import com.demo.demo_forum.model.dto.CommentDTO;
 import com.demo.demo_forum.model.dto.CommentDTO2;
 import com.demo.demo_forum.model.dto.PostDTO;
@@ -43,14 +49,33 @@ public interface ForumOperation {
   public List<UserCommentDTO> getCommentByUserId(String userId);
 
   @RequestMapping(value="/jsonplaceholder/get_all_user")
-  public List<UserEntity> getAllUser();
+  public ApiRes<List<UserDetailsDTO>> getAllUser();
 
   @RequestMapping(value="/jsonplaceholder/get_user_by_id")
-  public User getUserById(@RequestParam String userId);
+  public ApiRes<List<UserDetailsDTO>>  getUserById(@RequestParam Long userId);
 
-  @RequestMapping(value="/jsonplaceholder/update_user_by_id")
-  public User updatUser(@RequestParam String userId, @RequestBody User user);
+  @PutMapping(value="/jsonplaceholder/update_user_by_id")
+  public ApiRes<List<User>> updatUser(@RequestParam Long userId, @RequestBody User user);
 
   @RequestMapping(value="/jsonplaceholder/get_all_post")
-  public List<Post> getAllPost();
+  public ApiRes<List<Post>> getAllPost();
+
+  @RequestMapping(value="/jsonplaceholder/get_all_post_by_user_id/{userId}")
+  public ApiRes<List<Post>> getAllPostByUserId(@PathVariable Long userId);
+
+  @PostMapping(value="/jsonplaceholder/add_post_by_user_id/{userId}")
+  public ApiRes<List<Post>> addPostByUserId(@PathVariable Long userId, @RequestBody Post post);
+
+  @DeleteMapping(value="/jsonplaceholder/delete_post_by_post_id/{postId}")
+  public ApiRes<List<Post>> deletePostByPostId(@PathVariable Long postId);
+
+  @RequestMapping(value="/jsonplaceholder/get_all_comment")
+  public ApiRes<List<Comment>> getAllComment();
+
+  @RequestMapping(value="/jsonplaceholder/get_comment_by_post_id")
+  public ApiRes<List<CommentDTO>> getCommentByPostId(@RequestParam Long postId);
+
+  @PatchMapping(value="/jsonplaceholder/patch_comment_by_comment_id")
+  public ApiRes<List<Comment>> patchCommentByCommentId(@RequestParam Long commentId, @RequestBody CommentBodyDTO commentBodyDTO);
+
 }

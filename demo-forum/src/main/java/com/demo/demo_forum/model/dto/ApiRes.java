@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class ApiRes<T> {
-  private Long id;
-  private String username;
+  private String code;
+  private String message;
   private List<T> data;
 }

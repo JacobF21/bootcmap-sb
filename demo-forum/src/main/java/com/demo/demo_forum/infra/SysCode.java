@@ -10,7 +10,7 @@ public enum SysCode {
   REST_TEMPLATE(3,"RestTemplate Error - JSONPlaceHolder")
   ;
 
-  private int code;
+  private Integer code;
   private String desc;
 
   private SysCode(int code,String desc){
